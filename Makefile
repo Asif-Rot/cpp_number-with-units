@@ -40,5 +40,5 @@ valgrind: test1
 	valgrind --leak-check=full --error-exitcode=99 --tool=memcheck $(VALGRIND_FLAGS) ./test1 
 
 clean:
-	rm -f *.o test*
+	rm -f *.o test* main
 	rm -f StudentTest*.cpp

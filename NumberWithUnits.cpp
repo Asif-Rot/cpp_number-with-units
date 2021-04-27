@@ -31,7 +31,7 @@ namespace ariel {
                 tmp = (1/a2) * i.second;
                 units[t2][i.first] = tmp;
                 units[i.first][t2] = 1/tmp;
-            }   
+            }
         }
     }
 
@@ -105,13 +105,13 @@ namespace ariel {
     }
 
     // ==============================Multiply==============================
-    NumberWithUnits operator*(const double& number, const NumberWithUnits& a) {
-        return a * number;
-    }
-
     NumberWithUnits operator*(const NumberWithUnits& a, const double& number) {
         NumberWithUnits tmp((a.u * number), a.type);
         return tmp;
+    }
+    
+    NumberWithUnits operator*(const double& number, const NumberWithUnits& a) {
+        return a * number;
     }
 
     NumberWithUnits NumberWithUnits::operator*=(double number) {
@@ -226,12 +226,28 @@ namespace ariel {
         return false;
     }
 
-    bool NumberWithUnits::exists(string& unit) {
+    void NumberWithUnits::exists(string& unit) {
         if (units.find(unit) == units.end()) {
             throw ("No such unit");
         }
+    }
 
-        return true;
+    void NumberWithUnits::print_map() {
+        // For accessing outer map
+        unordered_map<string, unordered_map<string, double> >::iterator itr;
+  
+        // For accessing inner map
+        unordered_map<string, double>::iterator ptr;
+
+        for (itr = units.begin(); itr != units.end(); itr++) {
+  
+            for (ptr = itr->second.begin(); ptr != itr->second.end(); ptr++) {
+                cout << "> " << itr->first
+                    << " > " << ptr->first
+                    << " = " << ptr->second << endl;
+            }
+            cout << endl;
+        }
     }
 
 };

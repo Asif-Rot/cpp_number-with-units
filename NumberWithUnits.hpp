@@ -9,16 +9,16 @@ namespace ariel {
 
         public:
             NumberWithUnits(double number, std::string unit) {
-                if (!exists(unit)) {
-                    throw ("No such unit");
-                }
+                exists(unit);
+
                 this->u = number;
                 this->type = unit;
             }
 
             static void read_units(std::ifstream& file);
             static bool connected(const NumberWithUnits& a1, const NumberWithUnits& a2);
-            static bool exists(std::string& unit);
+            static void exists(std::string& unit);
+            static void print_map();
 
             // Unary operators
             NumberWithUnits operator-();
